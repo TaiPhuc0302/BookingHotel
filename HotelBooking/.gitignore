@@ -1,0 +1,49 @@
+﻿# Build output
+bin/
+obj/
+publish/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider IDE
+.idea/
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Logs
+*.log
+
+# Database
+*.mdf
+*.ldf
+*.dbmdl
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# Others
+*.pdb
+*.cache
+*.db
+*.bak
+*.swp
+*.tmp
+
+# Node / front-end (nếu có)
+node_modules/
+dist/
+
+# VS Code settings
+.vscode/settings.json
+.vscode/extensions.json
+
+# GitLens / Copilot temp files
+FileContentIndex/
