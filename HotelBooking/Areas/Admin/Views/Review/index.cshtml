@@ -8,7 +8,9 @@
 <div class="form-group">
     <label>Nhập ID khách sạn:</label>
     <input type="number" id="hotelId" class="form-control" placeholder="Nhập HotelId..." />
-    <button class="btn btn-primary mt-2" onclick="loadReviews()">Tải Review</button>
+
+    <!-- KHÔNG HIỂN THỊ NÚT TẢI REVIEW NỮA -->
+    <!-- Khi nhập ID và nhấn Enter sẽ tự load -->
 </div>
 
 <hr />
@@ -27,18 +29,31 @@
         </tr>
     </thead>
     <tbody id="reviewTable">
-        <tr><td colspan="8" class="text-center">Chưa có dữ liệu</td></tr>
+        <tr><td colspan="8" class="text-center">Đang tải dữ liệu...</td></tr>
     </tbody>
 </table>
 
 @section Scripts {
     <script>
-        // Hàm parse .NET DateTime /Date(1234567890)/ sang JS Date
+        // Parse kiểu /Date(12345)/ của .NET
         function parseDotNetDate(dotNetDate) {
-            var timestamp = parseInt(dotNetDate.replace(/\/Date\((\d+)\)\//, '$1'));
+            var timestamp = parseInt(dotNetDate.replace(/\/Date\((\d+)\)\//, "$1"));
             return new Date(timestamp);
         }
 
+        // Tự động load review khi vào trang
+        $(document).ready(function () {
+            loadReviews();
+        });
+
+        // Enter để lọc review theo HotelId
+        $("#hotelId").on("keyup", function (e) {
+            if (e.key === "Enter") {
+                loadReviews();
+            }
+        });
+
+        // Load toàn bộ review hoặc theo hotelId
         function loadReviews() {
             var hotelId = document.getElementById("hotelId").value;
 
@@ -48,12 +63,14 @@
                 url: url,
                 type: "GET",
                 data: { hotelId: hotelId },
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         var rows = "";
+
                         if (response.data.length > 0) {
-                            response.data.forEach(function(r) {
+                            response.data.forEach(function (r) {
                                 var createdAt = parseDotNetDate(r.CreatedAt).toLocaleDateString();
+
                                 rows += `
                                     <tr id="reviewRow_${r.Id}">
                                         <td>${r.Id}</td>
@@ -70,20 +87,22 @@
                                 `;
                             });
                         } else {
-                            rows = `<tr><td colspan="8" class="text-center">Chưa có dữ liệu</td></tr>`;
+                            rows = `<tr><td colspan="8" class="text-center">Không có dữ liệu</td></tr>`;
                         }
+
                         $("#reviewTable").html(rows);
                     } else {
                         alert(response.message);
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     console.log(xhr.responseText);
                     alert("Không thể tải dữ liệu. Lỗi: " + xhr.status);
                 }
             });
         }
 
+        // Xóa review
         function deleteReview(id) {
             if (!confirm("Bạn có chắc muốn xóa đánh giá này không?")) return;
 
@@ -93,7 +112,7 @@
                 url: url,
                 type: "POST",
                 data: { id: id },
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         alert(response.message);
                         $("#reviewRow_" + id).remove();
@@ -101,7 +120,7 @@
                         alert(response.message);
                     }
                 },
-                error: function(xhr) {
+                error: function (xhr) {
                     console.log(xhr.responseText);
                     alert("Xóa thất bại. Lỗi: " + xhr.status);
                 }
@@ -109,4 +128,3 @@
         }
     </script>
 }
-

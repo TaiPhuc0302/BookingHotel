@@ -47,3 +47,8 @@ dist/
 
 # GitLens / Copilot temp files
 FileContentIndex/
+
+echo "" >> .gitignore
+echo "# Visual Studio" >> .gitignore
+echo ".vs/" >> .gitignore
+echo "*.vsidx" >> .gitignore

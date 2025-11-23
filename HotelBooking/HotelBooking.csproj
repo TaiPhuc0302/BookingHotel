@@ -230,6 +230,9 @@
     <Content Include="Areas\Admin\Views\Report\Revenue.cshtml" />
     <Content Include="Areas\Admin\Views\Hotel\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Review\index.cshtml" />
+    <Content Include="Areas\Admin\Views\Loyalty\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Loyalty\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Loyalty\Edit.cshtml" />
     <None Include="Models\Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>

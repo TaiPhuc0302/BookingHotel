@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Quản lý Loyalty Tiers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mb-3">Quản lý Loyalty Tiers</h2>
+
+<!-- Button tạo mới -->
+<div class="mb-3">
+    <a href="@Url.Action("Create", "Loyalty", new { area = "Admin" })" class="btn btn-success" style="float:right">
+        + Thêm Loyalty Tier
+    </a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên tier</th>
+            <th>Giảm giá (%)</th>
+            <th>Multiplier</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody id="tierTable">
+        <tr><td colspan="6" class="text-center">Đang tải dữ liệu...</td></tr>
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        // Parse .NET /Date(123456)/
+        function parseDotNetDate(dotNetDate) {
+            var timestamp = parseInt(dotNetDate.replace(/\/Date\((\d+)\)\//, '$1'));
+            return new Date(timestamp);
+        }
+
+        // Load tất cả tiers
+        function loadTiers() {
+            var url = '@Url.Action("GetAllTiers", "Loyalty", new { area = "Admin" })';
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (response) {
+                    if (response.success) {
+                        var rows = "";
+
+                        if (response.data.length > 0) {
+                            response.data.forEach(t => {
+                                var created = parseDotNetDate(t.CreatedAt).toLocaleDateString();
+
+                                rows += `
+                                    <tr id="tier_${t.Id}">
+                                        <td>${t.Id}</td>
+                                        <td>${t.Name}</td>
+                                        <td>${t.DiscountPercent}%</td>
+                                        <td>${t.Multiplier}</td>
+                                        <td>${created}</td>
+                                        <td>
+                                            <a href="/Admin/Loyalty/Edit/${t.Id}" class="btn btn-sm btn-primary">Sửa</a>
+                                            <button class="btn btn-sm btn-danger" onclick="deleteTier(${t.Id})">Xóa</button>
+                                        </td>
+                                    </tr>
+                                `;
+                            });
+                        } else {
+                            rows = `<tr><td colspan="6" class="text-center">Không có dữ liệu</td></tr>`;
+                        }
+
+                        $("#tierTable").html(rows);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Không tải được dữ liệu!");
+                }
+            });
+        }
+
+        // Xóa tier
+        function deleteTier(id) {
+            if (!confirm("Bạn có chắc muốn xóa loyalty tier này không?")) return;
+
+            var url = '@Url.Action("DeleteTier", "Loyalty", new { area = "Admin" })';
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: { id: id },
+                success: function (response) {
+                    if (response.success) {
+                        $("#tier_" + id).remove();
+                        alert(response.message);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Không thể xóa. Lỗi server.");
+                }
+            });
+        }
+
+        // Auto load khi vào trang
+        $(document).ready(function () {
+            loadTiers();
+        });
+    </script>
+}
+
