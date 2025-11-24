@@ -1,4 +1,4 @@
-﻿using HotelBooking.Models;
+﻿/*using HotelBooking.Models;
 using HotelBooking.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -81,4 +81,4 @@ namespace HotelBooking.Services.Implementations
             _db.SubmitChanges();
         }
     }
-}
+}*/

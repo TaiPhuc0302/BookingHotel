@@ -77,7 +77,7 @@ namespace HotelBooking.Areas.Customer.Controllers
         }
 
         // GET: Customer/Loyalty/GetPointsHistory - AJAX
-        [HttpGet]
+        /*[HttpGet]
         public ActionResult GetPointsHistory()
         {
             try
@@ -102,6 +102,6 @@ namespace HotelBooking.Areas.Customer.Controllers
             {
                 return Json(new { success = false, message = "Lỗi: " + ex.Message }, JsonRequestBehavior.AllowGet);
             }
-        }
+        }*/
     }
 }
