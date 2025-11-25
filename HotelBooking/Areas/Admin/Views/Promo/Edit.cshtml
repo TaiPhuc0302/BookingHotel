@@ -53,6 +53,14 @@
             <input type="number" class="form-control" id="PerUserLimit" name="PerUserLimit" min="0">
         </div>
 
+        <div class="mb-3">
+            <label for="IsActive" class="form-label">Trạng thái <span class="text-danger">*</span></label>
+            <select class="form-select" id="IsActive" name="IsActive" required>
+                <option value="true">Hoạt động</option>
+                <option value="false">Tạm dừng</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary">Cập nhật</button>
         <a href="@Url.Action("Index", "Promo", new { area = "Admin" })" class="btn btn-secondary ms-2">Hủy</a>
     </form>
@@ -61,41 +69,95 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            const promoId = '@ViewBag.PromoId';
+        const promoId = '@ViewBag.PromoId';
 
-            // Load dữ liệu promo hiện tại
-            $.get('@Url.Action("GetPromoById", "Promo", new { area = "Admin" })/' + promoId, function (res) {
+        // Load dữ liệu
+        $.get('/Admin/Promo/GetPromoById/' + promoId)
+            .done(function (res) {
                 if (res.success && res.data) {
                     const p = res.data;
+
                     $('#Id').val(p.Id);
-                    $('#Code').val(p.Code);
-                    $('#Description').val(p.Description);
-                    $('#Type').val(p.Type);
-                    $('#Value').val(p.Value);
-                    $('#StartDate').val(p.StartDate ? new Date(p.StartDate).toISOString().substring(0, 10) : '');
-                    $('#EndDate').val(p.EndDate ? new Date(p.EndDate).toISOString().substring(0, 10) : '');
+                    $('#Code').val(p.Code || '');
+                    $('#Description').val(p.Description || '');
+                    $('#Type').val(p.Type || '');
+                    $('#Value').val(p.Value || 0);
+
+                    // Ngày đã được format sẵn ở server → gán thẳng
+                    $('#StartDate').val(p.StartDate || '');
+                    $('#EndDate').val(p.EndDate || '');
+
                     $('#UsageLimit').val(p.UsageLimit ?? 0);
                     $('#PerUserLimit').val(p.PerUserLimit ?? 0);
+
+                    // Trạng thái
+                    $('#IsActive').val(p.IsActive === true ? "true" : "false");
+
+                    console.log("Đã load đầy đủ dữ liệu:", p); // để bạn kiểm tra
                 } else {
-                    alert(res.message || "Không tải được dữ liệu khuyến mãi");
-                    window.location.href = '@Url.Action("Index", "Promo", new { area = "Admin" })';
+                    alert(res.message || "Không tìm thấy khuyến mãi");
+                    window.location.href = '/Admin/Promo';
                 }
+            })
+            .fail(function () {
+                alert("Lỗi kết nối server");
             });
 
-            // Submit cập nhật
+        // Submit (giữ nguyên như cũ, chỉ thêm validate ngày)
+        $('#editPromoForm').on('submit', function (e) {
+            e.preventDefault();
+
+            if ($('#StartDate').val() > $('#EndDate').val()) {
+                alert("Ngày kết thúc phải >= ngày bắt đầu!");
+                return;
+            }
+
+            const formData = {
+                Id: $('#Id').val(),
+                Code: $('#Code').val().trim().toUpperCase(),
+                Description: $('#Description').val().trim(),
+                Type: $('#Type').val(),
+                Value: parseFloat($('#Value').val()) || 0,
+                StartDate: $('#StartDate').val(),
+                EndDate: $('#EndDate').val(),
+                UsageLimit: parseInt($('#UsageLimit').val()) || 0,
+                PerUserLimit: parseInt($('#PerUserLimit').val()) || 0,
+                IsActive: $('#IsActive').val() === "true"
+            };
+
+            $.post('/Admin/Promo/UpdatePromo', formData)
+                .done(function (res) {
+                    if (res.success) {
+                        alert("Cập nhật thành công!");
+                        window.location.href = '/Admin/Promo';
+                    } else {
+                        alert(res.message);
+                    }
+                });
+        });
+   
+
+            // Submit form
             $('#editPromoForm').on('submit', function (e) {
                 e.preventDefault();
 
+                // Validate ngày
+                if (new Date($('#StartDate').val()) > new Date($('#EndDate').val())) {
+                    alert("Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu!");
+                    return;
+                }
+
                 const formData = {
                     Id: parseInt($('#Id').val()),
-                    Code: $('#Code').val().trim(),
+                    Code: $('#Code').val().trim().toUpperCase(),
                     Description: $('#Description').val().trim(),
                     Type: $('#Type').val(),
-                    Value: parseFloat($('#Value').val()),
+                    Value: parseFloat($('#Value').val()) || 0,
                     StartDate: $('#StartDate').val(),
                     EndDate: $('#EndDate').val(),
                     UsageLimit: parseInt($('#UsageLimit').val()) || 0,
-                    PerUserLimit: parseInt($('#PerUserLimit').val()) || 0
+                    PerUserLimit: parseInt($('#PerUserLimit').val()) || 0,
+                    IsActive: $('#IsActive').val() === "true"
                 };
 
                 $.ajax({
@@ -116,6 +178,16 @@
                 });
             });
         });
+
+        // Hiển thị thông báo đẹp
+        function showAlert(message, type = "info") {
+            const alertHtml = `
+                <div class="alert alert-${type} alert-dismissible fade show mt-3" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>`;
+            $('#alert-container').html(alertHtml);
+        }
     </script>
 }
 
