@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -76,7 +77,7 @@ namespace HotelBooking.Areas.Customer.Controllers
         }
 
         // POST: Customer/Profile/UpdateProfile - AJAX
-        [HttpPost]
+        //[HttpPost]
         //public ActionResult UpdateProfile(ProfileEditVM model)
         //{
         //    try

@@ -1,7 +1,9 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+
 
 namespace HotelBooking.Areas.Admin.Controllers
 {
@@ -18,35 +20,38 @@ namespace HotelBooking.Areas.Admin.Controllers
         // GET: Admin/Room/Index
         public ActionResult Index()
         {
-            return View();
+            return View("");
         }
 
-        // GET: Admin/Room/GetAllRooms - AJAX
+        // GET: Admin/Room/GetAllRooms - AJAX     
         [HttpGet]
-        public ActionResult GetAllRooms(int? hotelId)
+        public ActionResult GetAllRooms(string keyword = null)
         {
             try
             {
-                var query = _db.Rooms.AsQueryable();
+                var query = from r in _db.Rooms
+                            join h in _db.Hotels on r.HotelId equals h.Id
+                            where r.IsActive == true
+                            select new
+                            {
+                                r.Id,
+                                HotelName = h.Name,
+                                r.Name,
+                                r.Capacity,
+                                r.PricePerNight,
+                                r.TotalRooms,
+                                r.IsActive
+                            };
 
-                if (hotelId.HasValue)
-                    query = query.Where(r => r.HotelId == hotelId.Value);
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    keyword = keyword.Trim().ToLower();
+                    query = query.Where(x => x.HotelName.ToLower().Contains(keyword));
+                }
 
-                var rooms = query
-                    .Select(r => new
-                    {
-                        r.Id,
-                        HotelName = r.Hotel.Name,
-                        r.HotelId,
-                        r.Name,
-                        r.Capacity,
-                        r.PricePerNight,
-                        r.TotalRooms,
-                        r.IsActive
-                    })
-                    .ToList();
+                var result = query.OrderBy(x => x.HotelName).ThenBy(x => x.Name).ToList();
 
-                return Json(new { success = true, data = rooms }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, data = result }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -89,9 +94,21 @@ namespace HotelBooking.Areas.Admin.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return Json(new { success = false, message = "Dữ liệu không hợp lệ" });
+                if (Request.ContentType.Contains("application/json"))
+                {
 
+                }
+
+                if (model.HotelId <= 0 || string.IsNullOrEmpty(model.Code) || string.IsNullOrEmpty(model.Name))
+                    return Json(new { success = false, message = "Vui lòng điền đầy đủ thông tin bắt buộc" });
+
+                bool codeExists = _db.Rooms.Any(r => r.HotelId == model.HotelId && r.Code == model.Code.Trim().ToUpper());
+                if (codeExists)
+                    return Json(new { success = false, message = "Mã phòng đã tồn tại trong khách sạn này!" });
+
+                model.Code = model.Code.Trim().ToUpper();
+                model.Name = model.Name.Trim();
+                model.Description = string.IsNullOrEmpty(model.Description) ? null : model.Description.Trim();
                 model.IsActive = true;
                 model.CreatedAt = DateTime.Now;
                 model.UpdatedAt = DateTime.Now;
@@ -132,6 +149,7 @@ namespace HotelBooking.Areas.Admin.Controllers
                         r.Capacity,
                         r.PricePerNight,
                         r.TotalRooms,
+
                     })
                     .FirstOrDefault();
 

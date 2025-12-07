@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using HotelBooking.Services.Interfaces;
 using System;
 using System.Linq;

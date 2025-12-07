@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace HotelBooking.Services.Implementations
 {
-    public class PaymentService : IPaymentService
+    public class PaymentServiceImpl : IPaymentService
     {
         private readonly DatabaseDataContext _db;
 
-        public PaymentService()
+        public PaymentServiceImpl()
         {
             _db = new DatabaseDataContext();
         }

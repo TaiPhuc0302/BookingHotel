@@ -1,6 +1,7 @@
 ﻿@model HotelBooking.Models.Hotel
 @{
     ViewBag.Title = "Chi tiết khách sạn";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
     var hotelImages = ViewBag.HotelImages as List<HotelBooking.Models.HotelImage>;
     var rooms = ViewBag.Rooms as List<HotelBooking.Models.Room>;

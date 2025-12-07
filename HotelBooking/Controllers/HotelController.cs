@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -58,31 +59,31 @@ namespace HotelBooking.Controllers
         }
 
         // GET: Hotel/GetRooms/5 - AJAX
-        //[HttpGet]
-        //public ActionResult GetRooms(int id)
-        //{
-        //    try
-        //    {
-        //        var rooms = _db.Rooms
-        //            .Where(r => r.HotelId == id && r.IsActive)
-        //            .Select(r => new
-        //            {
-        //                r.Id,
-        //                r.Name,
-        //                r.Description,
-        //                r.Capacity,
-        //                r.PricePerNight,
-        //                r.TotalRooms
-        //            })
-        //            .ToList();
+        [HttpGet]
+        public ActionResult GetRooms(int id)
+        {
+            try
+            {
+                var rooms = _db.Rooms
+                    .Where(r => r.HotelId == id && r.IsActive == true)
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Name,
+                        r.Description,
+                        r.Capacity,
+                        r.PricePerNight,
+                        r.TotalRooms
+                    })
+                    .ToList();
 
-        //        return Json(new { success = true, rooms = rooms }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { success = false, message = "Lỗi: " + ex.Message }, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
+                return Json(new { success = true, rooms = rooms }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Lỗi: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         // GET: Hotel/GetReviews/5 - AJAX
         [HttpGet]

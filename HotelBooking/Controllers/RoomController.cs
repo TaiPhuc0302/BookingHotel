@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using System.Web.Mvc;
 
 namespace HotelBooking.Controllers
@@ -12,7 +13,7 @@ namespace HotelBooking.Controllers
             _db = new DatabaseDataContext();
         }
 
-        // GET: Room/Details/5
+        //// GET: Room/Details/5
         //public ActionResult Details(int id)
         //{
         //    try

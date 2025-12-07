@@ -1,4 +1,5 @@
-﻿namespace HotelBooking.Services.Interfaces
+﻿
+namespace HotelBooking.Services.Interfaces
 {
     public interface IPaymentService
     {

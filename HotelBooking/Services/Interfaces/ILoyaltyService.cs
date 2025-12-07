@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using System.Collections.Generic;
 
 namespace HotelBooking.Services.Interfaces
@@ -11,6 +12,6 @@ namespace HotelBooking.Services.Interfaces
         void UpdateTier(LoyaltyTier tier);
         void DeleteTier(int id);
         int GetCustomerPoints(int userId);
-        void AddPoints(int userId, int points, int? bookingId, string reason);
+        //void AddPoints(int userId, int points, int? bookingId, string reason);
     }
 }

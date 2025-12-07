@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "F:\\Downloads\\HotelBooking\\HotelBooking\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|f:\\downloads\\hotelbooking\\hotelbooking\\hotelbooking\\areas\\admin\\controllers\\loyaltycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\areas\\admin\\controllers\\loyaltycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|f:\\downloads\\hotelbooking\\hotelbooking\\hotelbooking\\areas\\admin\\views\\hotel\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\areas\\admin\\views\\hotel\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|f:\\downloads\\hotelbooking\\hotelbooking\\hotelbooking\\areas\\admin\\views\\loyalty\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\areas\\admin\\views\\loyalty\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|f:\\downloads\\hotelbooking\\hotelbooking\\hotelbooking\\areas\\admin\\views\\loyalty\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\areas\\admin\\views\\loyalty\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|f:\\downloads\\hotelbooking\\hotelbooking\\hotelbooking\\areas\\admin\\controllers\\hotelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{75EFFF97-BF1A-4F51-9734-E6E903D2D519}|HotelBooking\\HotelBooking.csproj|solutionrelative:hotelbooking\\areas\\admin\\controllers\\hotelcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +18,22 @@
       "DocumentGroups": [
         {
           "DockedHeight": 303,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HotelController.cs",
+              "DocumentMoniker": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Controllers\\HotelController.cs",
+              "RelativeDocumentMoniker": "HotelBooking\\Areas\\Admin\\Controllers\\HotelController.cs",
+              "ToolTip": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Controllers\\HotelController.cs",
+              "RelativeToolTip": "HotelBooking\\Areas\\Admin\\Controllers\\HotelController.cs",
+              "ViewState": "AgIAABkBAAAAAAAAAAAIwB8BAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-07T02:18:51.616Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
@@ -35,40 +45,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LoyaltyController.cs",
-              "DocumentMoniker": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Controllers\\LoyaltyController.cs",
-              "RelativeDocumentMoniker": "HotelBooking\\Areas\\Admin\\Controllers\\LoyaltyController.cs",
-              "ToolTip": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Controllers\\LoyaltyController.cs",
-              "RelativeToolTip": "HotelBooking\\Areas\\Admin\\Controllers\\LoyaltyController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAYwGgAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T10:39:03.455Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Edit.cshtml",
-              "DocumentMoniker": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Edit.cshtml",
-              "RelativeDocumentMoniker": "HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Edit.cshtml",
-              "ToolTip": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Edit.cshtml",
-              "RelativeToolTip": "HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Edit.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAowEYAAABDAAAAAAAAAA==",
+              "DocumentMoniker": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Views\\Hotel\\Edit.cshtml",
+              "RelativeDocumentMoniker": "HotelBooking\\Areas\\Admin\\Views\\Hotel\\Edit.cshtml",
+              "ToolTip": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Views\\Hotel\\Edit.cshtml",
+              "RelativeToolTip": "HotelBooking\\Areas\\Admin\\Views\\Hotel\\Edit.cshtml",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAwwJ0AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T10:35:48.719Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Index.cshtml",
-              "RelativeDocumentMoniker": "HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Index.cshtml",
-              "ToolTip": "f:\\Downloads\\HotelBooking\\HotelBooking\\HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Index.cshtml",
-              "RelativeToolTip": "HotelBooking\\Areas\\Admin\\Views\\Loyalty\\Index.cshtml",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T10:35:39.229Z",
+              "WhenOpened": "2025-12-07T02:19:00.119Z",
               "EditorCaption": ""
             }
           ]

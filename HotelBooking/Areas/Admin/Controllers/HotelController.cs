@@ -53,21 +53,29 @@ namespace HotelBooking.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/Hotel/CreateHotel - AJAX
         [HttpPost]
-        public ActionResult CreateHotel(Hotel model)
+        public ActionResult CreateHotel(Hotel model, string MainImageUrl)
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return Json(new { success = false, message = "Dữ liệu không hợp lệ" });
-
-                model.IsActive = true;
                 model.CreatedAt = DateTime.Now;
                 model.UpdatedAt = DateTime.Now;
 
                 _db.Hotels.InsertOnSubmit(model);
                 _db.SubmitChanges();
+
+                if (!string.IsNullOrWhiteSpace(MainImageUrl))
+                {
+                    var image = new HotelImage
+                    {
+                        HotelId = model.Id,
+                        Url = MainImageUrl,
+                        AltText = model.Name
+                    };
+
+                    _db.HotelImages.InsertOnSubmit(image);
+                    _db.SubmitChanges();
+                }
 
                 return Json(new { success = true, message = "Thêm khách sạn thành công!" });
             }
@@ -115,10 +123,9 @@ namespace HotelBooking.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Lỗi: " + ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
-
-        // POST: Admin/Hotel/UpdateHotel - AJAX
+        // GET: Admin/Hotel/UpdateHotel
         [HttpPost]
-        public ActionResult UpdateHotel(Hotel model)
+        public ActionResult UpdateHotel(Hotel model, string imageUrl)
         {
             try
             {
@@ -129,43 +136,68 @@ namespace HotelBooking.Areas.Admin.Controllers
                 if (hotel == null)
                     return Json(new { success = false, message = "Không tìm thấy khách sạn" });
 
-                // =================== KIỂM TRA MỚI THÊM Ở ĐÂY ===================
-                // Nếu người dùng muốn chuyển sang Ngừng hoạt động (IsActive = false)
-                if (!model.IsActive) // tức là đang cố tắt khách sạn
+                // ================= CHECK TRẠNG THÁI =================
+                if (!model.IsActive)
                 {
-                    // Kiểm tra xem có booking nào đang "đang diễn ra" hoặc "chưa checkout" không
                     bool hasActiveBooking = _db.Bookings.Any(b => b.HotelId == model.Id &&
                         (b.Status == "pending" ||
                          b.Status == "confirmed" ||
                          b.Status == "paid" ||
                          b.Status == "cancelled" ||
-                         b.Status == "draft") &&  // tùy bạn đặt tên trạng thái
+                         b.Status == "draft") &&
                         (b.CheckOutDate == null || b.CheckOutDate >= DateTime.Today));
-                    // hoặc đơn giản hơn: chưa có CheckoutDate hoặc CheckoutDate > hôm nay
 
                     if (hasActiveBooking)
                     {
                         return Json(new
                         {
                             success = false,
-                            message = "Không thể ngừng hoạt động khách sạn vì vẫn còn phòng đang được đặt hoặc đang có khách lưu trú!"
+                            message = "Không thể ngừng hoạt động khách sạn vì còn phòng đang được đặt!"
                         });
                     }
                 }
-                // ================================================================
 
-                // Nếu qua được kiểm tra → cho phép cập nhật bình thường
+                // ================== CẬP NHẬT HOTEL ==================
                 hotel.Name = model.Name;
                 hotel.Address = model.Address;
                 hotel.City = model.City;
                 hotel.Country = model.Country;
                 hotel.StarRating = model.StarRating;
                 hotel.Description = model.Description;
-                hotel.IsActive = model.IsActive;          // đã có dòng này rồi
+                hotel.IsActive = model.IsActive;
                 hotel.UpdatedAt = DateTime.Now;
 
-                _db.SubmitChanges();
+                // ================== CẬP NHẬT ẢNH ====================
+                // ✔ Fix 1: Nếu form có gửi MainImageUrl (kể cả khi giống ảnh cũ)
+                // ✔ Fix 2: Không update nếu MainImageUrl null/empty
+                if (!string.IsNullOrWhiteSpace(imageUrl))
+                {
+                    var img = _db.HotelImages
+                        .Where(i => i.HotelId == model.Id)
+                        .OrderBy(i => i.Id)
+                        .FirstOrDefault();
 
+                    if (img == null)
+                    {
+                        // ✔ Fix 3: Bắt buộc Insert nếu chưa có ảnh
+                        img = new HotelImage
+                        {
+                            HotelId = model.Id,
+                            Url = imageUrl,
+                            AltText = model.Name
+                        };
+
+                        _db.HotelImages.InsertOnSubmit(img);
+                    }
+                    else
+                    {
+                        // ✔ Fix 4: Update đúng ảnh đầu tiên
+                        img.Url = imageUrl;
+                        img.AltText = model.Name;
+                    }
+                }
+
+                _db.SubmitChanges();
                 return Json(new { success = true, message = "Cập nhật thành công!" });
             }
             catch (Exception ex)
@@ -250,6 +282,28 @@ namespace HotelBooking.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Lỗi: " + ex.Message });
             }
+        }
+
+        [HttpGet]
+        public ActionResult GetMainImage(int? id)
+        {
+            if (!id.HasValue || id <= 0)
+                return Json(new { success = false, message = "ID không hợp lệ" }, JsonRequestBehavior.AllowGet);
+
+            var mainImageUrl = _db.HotelImages
+                .Where(img => img.HotelId == id.Value)
+                .OrderBy(img => img.Id)
+                .Select(img => img.Url)
+                .FirstOrDefault();
+
+            if (string.IsNullOrEmpty(mainImageUrl))
+                return Json(new { success = false, message = "Chưa có ảnh" }, JsonRequestBehavior.AllowGet);
+
+            return Json(new
+            {
+                success = true,
+                data = new { Url = mainImageUrl }   // ← DÙNG TÊN ImageUrl CHO VIEW
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

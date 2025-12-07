@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using HotelBooking.ViewModels;
 using System.Collections.Generic;
 

@@ -234,12 +234,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Admin\Controllers\HotelController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoyaltyController.cs" />
     <Compile Include="Areas\Admin\Controllers\PromoController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReviewController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoomController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Customer\Controllers\BookingController.cs" />
     <Compile Include="Areas\Customer\Controllers\LoyaltyController.cs" />
     <Compile Include="Areas\Customer\Controllers\ProfileController.cs" />
@@ -282,6 +284,7 @@
     <Compile Include="ViewModels\BookingCreateVM.cs" />
     <Compile Include="ViewModels\BookingDetailsVM.cs" />
     <Compile Include="ViewModels\BookingEditVM.cs" />
+    <Compile Include="ViewModels\CancelBookingVM.cs" />
     <Compile Include="ViewModels\PromoCodeVM.cs" />
     <Compile Include="ViewModels\HotelDetailsVM.cs" />
     <Compile Include="ViewModels\HotelListVM.cs" />
@@ -320,11 +323,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Customer\Views\Web.config" />
     <Content Include="Areas\Customer\Views\Booking\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Booking\Details.cshtml" />
     <Content Include="Areas\Customer\Views\Booking\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Booking\Payment.cshtml" />
-    <Content Include="Areas\Customer\Views\Hotel\Create.cshtml" />
-    <Content Include="Areas\Customer\Views\Hotel\Index.cshtml" />
     <Content Include="Areas\Customer\Views\Profile\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Hotel\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Hotel\Index.cshtml" />
@@ -345,6 +345,20 @@
     </Content>
     <Content Include="Areas\Admin\Views\Promo\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Promo\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Room\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Customer\Views\Booking\Cancel.cshtml" />
+    <Content Include="Areas\Customer\Views\Booking\Details.cshtml" />
+    <Content Include="Areas\Customer\Views\Loyalty\Index.cshtml" />
+    <Content Include="Areas\Customer\Views\Profile\Delete.cshtml" />
+    <Content Include="Areas\Customer\Views\Profile\ChangePassword.cshtml" />
+    <Content Include="Areas\Customer\Views\Review\Index.cshtml" />
     <None Include="Models\Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>
@@ -374,19 +388,20 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_HotelCard.cshtml" />
     <Content Include="Views\Search\Results.cshtml" />
-    <Content Include="Views\Hotel\Details.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_RoomCard.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Hotel\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\ViewModels\" />
     <Folder Include="Areas\Customer\ViewModels\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Views\CancelBookingVM\" />
     <Folder Include="Views\Room\" />
   </ItemGroup>
   <ItemGroup>

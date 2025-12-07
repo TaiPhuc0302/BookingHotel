@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace HotelBooking.Services.Implementations
 {
-    public class HotelService : IHotelService
+    public class HotelServiceImpl : IHotelService
     {
         private readonly DatabaseDataContext _db;
 
-        public HotelService()
+        public HotelServiceImpl()
         {
             _db = new DatabaseDataContext();
         }

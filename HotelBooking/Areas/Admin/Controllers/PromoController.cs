@@ -103,7 +103,6 @@ namespace HotelBooking.Areas.Admin.Controllers
                 if (promoEntity == null)
                     return Json(new { success = false, message = "Không tìm thấy" }, JsonRequestBehavior.AllowGet);
 
-                // Format ngày SAU KHI lấy ra khỏi database → LINQ-to-SQL không kêu nữa
                 var promo = new
                 {
                     promoEntity.Id,
@@ -175,7 +174,7 @@ namespace HotelBooking.Areas.Admin.Controllers
                 promo.EndDate = model.EndDate;
                 promo.UsageLimit = model.UsageLimit;
                 promo.PerUserLimit = model.PerUserLimit;
-                promo.IsActive = model.IsActive;           // ĐÃ THÊM: lưu trạng thái
+                promo.IsActive = model.IsActive;           
                 promo.UpdatedAt = DateTime.Now;
 
                 _db.SubmitChanges();

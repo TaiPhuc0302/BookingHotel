@@ -1,4 +1,5 @@
-﻿using HotelBooking.Models;
+﻿
+using HotelBooking.Models;
 using System.Collections.Generic;
 
 namespace HotelBooking.Services.Interfaces
