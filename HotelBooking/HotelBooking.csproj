@@ -256,13 +256,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\DatabaseDataContext.Partial.cs" />
+    <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\Database.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatabaseDataContext.Partial.cs" />
-    <Compile Include="Models\Hotel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Implementations\BookingService.cs" />
@@ -338,11 +338,6 @@
     <Content Include="Areas\Admin\Views\Loyalty\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Loyalty\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Loyalty\Edit.cshtml" />
-    <Content Include="Models\Database.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>Database.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Areas\Admin\Views\Promo\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Promo\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Booking\index.cshtml" />
@@ -359,6 +354,11 @@
     <Content Include="Areas\Customer\Views\Profile\Delete.cshtml" />
     <Content Include="Areas\Customer\Views\Profile\ChangePassword.cshtml" />
     <Content Include="Areas\Customer\Views\Review\Index.cshtml" />
+    <Content Include="Models\Database.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Database.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Models\Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>
@@ -373,13 +373,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -395,6 +388,13 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Hotel\Details.cshtml" />
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

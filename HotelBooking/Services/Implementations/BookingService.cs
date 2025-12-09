@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using HotelBooking.Models;
 using HotelBooking.Services.Interfaces;
 using HotelBooking.ViewModels;
@@ -117,3 +117,4 @@ namespace HotelBooking.Services.Implementations
         }
     }
 }
+*/

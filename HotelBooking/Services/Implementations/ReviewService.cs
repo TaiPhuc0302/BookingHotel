@@ -19,7 +19,7 @@ namespace HotelBooking.Services.Implementations
         public List<Review> GetHotelReviews(int hotelId)
         {
             return _db.Reviews
-                .Where(r => r.HotelId == hotelId && r.DeletedAt == null)
+                .Where(r => r.BookingId == hotelId && r.DeletedAt == null)
                 .OrderByDescending(r => r.CreatedAt)
                 .ToList();
         }

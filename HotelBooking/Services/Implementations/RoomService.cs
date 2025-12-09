@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using HotelBooking.Models;
 using HotelBooking.Services.Interfaces;
 using System;
@@ -27,7 +27,7 @@ namespace HotelBooking.Services.Implementations
         //    return _db.Rooms.FirstOrDefault(r => r.Id == id && r.IsActive);
         //}
 
-        public void CreateRoom(Room room)
+        *//*public void CreateRoom(Room room)
         {
             room.IsActive = true;
             room.CreatedAt = DateTime.Now;
@@ -49,7 +49,7 @@ namespace HotelBooking.Services.Implementations
                 existingRoom.UpdatedAt = DateTime.Now;
                 _db.SubmitChanges();
             }
-        }
+        }*//*
 
         public void DeleteRoom(int id)
         {
@@ -63,3 +63,4 @@ namespace HotelBooking.Services.Implementations
         }
     }
 }
+*/

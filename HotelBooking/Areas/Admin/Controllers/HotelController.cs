@@ -60,7 +60,6 @@ namespace HotelBooking.Areas.Admin.Controllers
             {
                 model.CreatedAt = DateTime.Now;
                 model.UpdatedAt = DateTime.Now;
-
                 _db.Hotels.InsertOnSubmit(model);
                 _db.SubmitChanges();
 
@@ -230,7 +229,7 @@ namespace HotelBooking.Areas.Admin.Controllers
 
                 // Review
                 var reviews = _db.Reviews
-                    .Where(r => r.HotelId == id && r.DeletedAt == null)
+                    .Where(r => r.BookingId == id && r.DeletedAt == null)
                     .OrderByDescending(r => r.CreatedAt)
                     .ToList();
 

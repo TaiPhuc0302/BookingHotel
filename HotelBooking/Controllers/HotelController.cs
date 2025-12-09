@@ -69,11 +69,11 @@ namespace HotelBooking.Controllers
                     .Select(r => new
                     {
                         r.Id,
-                        r.Name,
+                        r.Code,
                         r.Description,
                         r.Capacity,
                         r.PricePerNight,
-                        r.TotalRooms
+                        /*r.TotalRooms*/
                     })
                     .ToList();
 
@@ -92,7 +92,7 @@ namespace HotelBooking.Controllers
             try
             {
                 var reviews = _db.Reviews
-                    .Where(r => r.HotelId == id && r.DeletedAt == null)
+                    .Where(r => r.BookingId == id && r.DeletedAt == null)
                     .OrderByDescending(r => r.CreatedAt)
                     .Select(r => new
                     {

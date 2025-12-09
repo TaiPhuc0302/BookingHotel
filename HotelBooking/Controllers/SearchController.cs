@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using HotelBooking.Models;
 using HotelBooking.ViewModels;
 using System;
@@ -93,3 +93,4 @@ namespace HotelBooking.Controllers
         }
     }
 }
+*/

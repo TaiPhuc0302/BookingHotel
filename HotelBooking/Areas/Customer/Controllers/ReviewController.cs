@@ -41,7 +41,7 @@ namespace HotelBooking.Areas.Customer.Controllers
                     .Select(r => new
                     {
                         r.Id,
-                        HotelName = r.Hotel.Name,
+                        BookingName = r.Booking.Room,
                         r.Rating,
                         r.Title,
                         r.Content,
@@ -145,8 +145,8 @@ namespace HotelBooking.Areas.Customer.Controllers
                     .Select(r => new
                     {
                         r.Id,
-                        r.HotelId,
-                        HotelName = r.Hotel.Name,
+                        r.BookingId,
+                        BookingName = r.Booking.Room,
                         r.Rating,
                         r.Title,
                         r.Content,
